@@ -1,5 +1,5 @@
 # Jersey (JAX-RS) examples project
-#### Project consisit of several examples/samples of Jersey (JAX-RS) features.
+#### Project consists of several examples/samples of Jersey (JAX-RS) features.
 
 A companion projects for [Jersey (JAX-RS) guides](http://www.geekmj.in/guides/jersey-restful-web-services-development-guides-196/) on [GeekMJ website](www.geekmj.in).
 
