@@ -22,6 +22,14 @@ public class JerseyConfig extends ResourceConfig {
 	 */
 	public JerseyConfig() {
 		
+		/*
+		 * Jersey will automatically register class with @provider, @Component  by scanning
+		 * these packages + nested packages
+		 */
+		packages("in.geekmj.resource", "in.geekmj.config");
+		
+		/* CustomTypeParamterConsumeResource auto scanned and register */
+		//register(CustomTypeParamterConsumeResource.class);
 		register(MatrixUriResource.class);
 		register(RequestCookiesResource.class);
 		register(RequestHeaderResource.class);
