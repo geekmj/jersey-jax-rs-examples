@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Form to test Jersey form data handling</title>
+	</head>
+<body>
+
+	<h2>Jersey form data handling using @formParam annotation</h2>
+	<form action="/form-data/form-param" method="POST" name="form1">
+		<label>Name</label> <input maxlength="15" name="name"/> 
+		<br/><br/>
+		<label>Phone</label> <input maxlength="15" name="phone"/> 
+		<br/><br/>
+		<input type="submit" value="Submit" />
+		<input type="reset" value="Reset" />
+	</form>
+	<br/>
+	<h2>Jersey form data handling using MultivaluedMap injected</h2>
+	<form action="/form-data/multivalued-map" method="POST" name="form2">
+		<label>Name</label> <input maxlength="15" name="name" /> 
+		<br/><br/>
+		<label>Phone</label> <input maxlength="15" name="phone"/> 
+		<br/><br/>
+		<input type="submit" value="Submit" />
+		<input type="reset" value="Reset" />
+	</form>
+	<br/>
+	<h2>Jersey form data handling using context.getQueryParameters() </h2>
+	<form action="/form-data/context" method="POST" name="form3">
+		<label>Name</label> <input maxlength="15" name="name"/> 
+		<br/><br/>
+		<label>Phone</label> <input maxlength="15" name="phone"/> 
+		<br/><br/>
+		<input type="submit" value="Submit" />
+		<input type="reset" value="Reset" />
+	</form>
+</body>
+</html>

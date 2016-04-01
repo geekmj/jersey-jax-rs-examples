@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.3.0.RELEASE'
+        springBootVersion = '1.3.3.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -28,8 +28,10 @@ repositories {
 
 
 dependencies {
-     compile 'org.springframework.boot:spring-boot-starter-jersey', 
+     compile 'org.springframework.boot:spring-boot-starter-web',
+     		 'org.springframework.boot:spring-boot-starter-jersey', 
     		 'org.springframework.boot:spring-boot-starter-jdbc',
+    		 'org.springframework.boot:spring-boot-devtools',	 
     		 'com.h2database:h2:1.4.+'
     		 
     testCompile 'org.springframework.boot:spring-boot-starter-test'

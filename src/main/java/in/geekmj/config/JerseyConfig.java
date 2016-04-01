@@ -3,6 +3,7 @@ package in.geekmj.config;
 import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.stereotype.Component;
 
 import in.geekmj.resource.EmployeeResource;
@@ -37,5 +38,6 @@ public class JerseyConfig extends ResourceConfig {
 		register(EmployeeResource.class);
 		register(HumansResource.class);
 		register(HelloWorldResource.class);
+		property(ServletProperties.FILTER_FORWARD_ON_404, true);
 	}
 }
