@@ -29,7 +29,8 @@ repositories {
 
 dependencies {
      compile 'org.springframework.boot:spring-boot-starter-web',
-     		 'org.springframework.boot:spring-boot-starter-jersey', 
+     		 'org.springframework.boot:spring-boot-starter-jersey',
+     		 'org.glassfish.jersey.media:jersey-media-multipart:2.+', 
     		 'org.springframework.boot:spring-boot-starter-jdbc',
     		 'org.springframework.boot:spring-boot-devtools',	 
     		 'com.h2database:h2:1.4.+'

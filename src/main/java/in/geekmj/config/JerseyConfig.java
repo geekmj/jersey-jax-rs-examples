@@ -2,6 +2,7 @@ package in.geekmj.config;
 
 import javax.ws.rs.ApplicationPath;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.stereotype.Component;
@@ -39,5 +40,6 @@ public class JerseyConfig extends ResourceConfig {
 		register(HumansResource.class);
 		register(HelloWorldResource.class);
 		property(ServletProperties.FILTER_FORWARD_ON_404, true);
+		register(MultiPartFeature.class);
 	}
 }
