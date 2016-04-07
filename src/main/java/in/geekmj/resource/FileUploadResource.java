@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 
- * @author geekmj Three ways to get Form data in Jersey
+ * @author geekmj Single File and Multiple Files upload example
  */
 @Path("/upload")
 
@@ -32,63 +32,85 @@ public class FileUploadResource {
 	@Path("/file")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(@DefaultValue("") @FormDataParam("tags") String tags, 
-				@FormDataParam("file") InputStream file,
-				@FormDataParam("file") FormDataContentDisposition fileDisposition) {
+	public Response uploadFile(@DefaultValue("") @FormDataParam("tags") String tags,
+			@FormDataParam("file") InputStream file,
+			@FormDataParam("file") FormDataContentDisposition fileDisposition) {
 
 		String fileName = fileDisposition.getFileName();
-		
+
 		saveFile(file, fileName);
-		
-		String fileDetails = "File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags "+ tags;
+
+		String fileDetails = "File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags " + tags;
 
 		System.out.println(fileDetails);
 
 		return Response.ok(fileDetails).build();
 	}
-	
+
 	@Path("/files")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFiles2(@DefaultValue("") @FormDataParam("tags") String tags, 
-			@FormDataParam("file") List<FormDataBodyPart> bodyParts,
-			@FormDataParam("file") FormDataContentDisposition fileDispositions) {
-		
+	public Response uploadFiles2(@DefaultValue("") @FormDataParam("tags") String tags,
+			@FormDataParam("files") List<FormDataBodyPart> bodyParts,
+			@FormDataParam("files") FormDataContentDisposition fileDispositions,
+			@FormDataParam("file2") InputStream file2,
+			@FormDataParam("file2") FormDataContentDisposition fileDisposition2) {
+
 		StringBuffer fileDetails = new StringBuffer("");
-		
-		for( int i = 0 ; i < bodyParts.size(); i++ ) {
-			 BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyParts.get(i).getEntity();
-			String fileName = bodyParts.get(i).getContentDisposition().getFileName();	
-			
+
+		/* Save multiple files */
+
+		for (int i = 0; i < bodyParts.size(); i++) {
+			/*
+			 * Casting FormDataBodyPart to BodyPartEntity, which can give us
+			 * InputStream for uploaded file
+			 */
+			BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyParts.get(i).getEntity();
+			String fileName = bodyParts.get(i).getContentDisposition().getFileName();
+
 			saveFile(bodyPartEntity.getInputStream(), fileName);
-			
-			fileDetails.append("File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags "+ tags + "\n");
+
+			fileDetails.append(" File saved at /Volumes/Drive2/temp/file/" + fileName);
 		}
+
+		/* Save File 2 */
+
+		String file2Name = fileDisposition2.getFileName();
+
+		saveFile(file2, file2Name);
+		fileDetails.append(" File saved at /Volumes/Drive2/temp/file/" + file2Name);
+		fileDetails.append(" Tag Details : " + tags);
 
 		System.out.println(fileDetails);
 
 		return Response.ok(fileDetails.toString()).build();
 	}
-	
+
 	@Path("/files2")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFiles(final FormDataMultiPart multiPart) {
-		
-		List<FormDataBodyPart> bodyParts = multiPart.getFields("file");
-		
+
+		List<FormDataBodyPart> bodyParts = multiPart.getFields("files");
+
 		StringBuffer fileDetails = new StringBuffer("");
-		
-		for( int i = 0 ; i < bodyParts.size(); i++ ) {
-			 BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyParts.get(i).getEntity();
-			
-			String fileName = bodyParts.get(i).getContentDisposition().getFileName();	
-			
+
+		/* Save multiple files */
+		for (int i = 0; i < bodyParts.size(); i++) {
+			BodyPartEntity bodyPartEntity = (BodyPartEntity) bodyParts.get(i).getEntity();
+			String fileName = bodyParts.get(i).getContentDisposition().getFileName();
 			saveFile(bodyPartEntity.getInputStream(), fileName);
-			
-			fileDetails.append("File saved at /Volumes/Drive2/temp/file/" + fileName + " with tags "+ multiPart.getField("tags").getValue() + "\n");
+			fileDetails.append(" File saved at /Volumes/Drive2/temp/file/" + fileName);
 		}
 
+		/* Save File 2 */
+
+		BodyPartEntity bodyPartEntity = ((BodyPartEntity) multiPart.getField("file2").getEntity());
+		String file2Name = multiPart.getField("file2").getFormDataContentDisposition().getFileName();
+		saveFile(bodyPartEntity.getInputStream(), file2Name);
+		fileDetails.append(" File saved at /Volumes/Drive2/temp/file/" + file2Name);
+
+		fileDetails.append(" Tag Details : " + multiPart.getField("tags").getValue());
 		System.out.println(fileDetails);
 
 		return Response.ok(fileDetails.toString()).build();
@@ -97,7 +119,7 @@ public class FileUploadResource {
 	private void saveFile(InputStream file, String name) {
 		try {
 			/* Change directory path */
-			java.nio.file.Path path = FileSystems.getDefault().getPath("/Volumes/Drive2/temp/file/" + name); 
+			java.nio.file.Path path = FileSystems.getDefault().getPath("/Volumes/Drive2/temp/file/" + name);
 			/* Save InputStream as file */
 			Files.copy(file, path);
 		} catch (IOException ie) {

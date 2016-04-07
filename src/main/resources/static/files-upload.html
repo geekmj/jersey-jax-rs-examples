@@ -2,16 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Upload Files Test 2</title>
 </head>
 <body>
 	<h2>Upload files</h2>
 	<form action="/upload/files" enctype="multipart/form-data" method="post">
-		<label>Select File</label><input type= "file" name="file" /> <br/><br/>
-		<label>Select File</label><input type= "file" name="file" /> <br/><br/>
-		<label>Select File</label><input type= "file" name="file" /> <br/><br/>
-		<label>Select File</label><input type= "file" name="file" /> <br/><br/>
-		<label>Select File</label><input type= "file" name="file" /> <br/><br/>
+		<label>Select multiple files</label><input type= "file" name="files" multiple /> <br/><br/>
+		<label>Select File</label><input type= "file" name="file2" /> <br/><br/>
 		<label>Tags</label> <input name="tags" maxlength="10"/> <br/><br/>
 		<input type="submit" title="Save"/>
 	</form>
