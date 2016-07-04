@@ -17,9 +17,9 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 /**
- * @author geekmj 
+ * @author geekmj
  * 
- * File download example
+ *         File download example
  */
 @Path("/download")
 @Component
@@ -27,19 +27,17 @@ public class FileDownloadResource {
 
 	@Autowired
 	private ResourceLoader resourceLoader;
-	
-	
+
 	@Path("/any-file-type/{type}")
 	@GET
 	public Response anyFileType(@PathParam("type") String fileType) {
 
 		/*
 		 * We are loading file kept in resources/static/ folder using Spring
-		 * ResourceLoader classpath mechanism. 
-		 * We have following files: 
-		 * 1. sample.doc 2. sample.jpg 3. sample.pdf 4. sample.png 
-		 * Based on type passed, we load sample.<type> from resources folder. 
-		 * We are using Spring ResourceLoader to load file.
+		 * ResourceLoader classpath mechanism. We have following files: 1.
+		 * sample.doc 2. sample.jpg 3. sample.pdf 4. sample.png Based on type
+		 * passed, we load sample.<type> from resources folder. We are using
+		 * Spring ResourceLoader to load file.
 		 */
 		File file = null;
 		String mimeType;
@@ -48,8 +46,8 @@ public class FileDownloadResource {
 			file = resourceLoader.getResource("classpath:static/sample." + fileType).getFile();
 
 			/*
-			 * We can also use normal File constructor to load a file. 
-			 * For e.g. File file = new File("C:\sample.pdf");
+			 * We can also use normal File constructor to load a file. For e.g.
+			 * File file = new File("C:\sample.pdf");
 			 */
 
 			if (!file.exists()) {
@@ -59,20 +57,25 @@ public class FileDownloadResource {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		/* Finding MIME type for explicitly setting MIME */
 		mimeType = new MimetypesFileTypeMap().getContentType(file);
-		
+
 		ResponseBuilder rb = Response.ok(file, mimeType);
 
-		/* Setting file name and making sure file download instead of showing in browser */
+		/*
+		 * Setting file name and making sure file download instead of showing in
+		 * browser
+		 */
 		rb.header("Content-Disposition", "inline; filename=sample." + fileType);
 
 		return rb.build();
 	}
-	
-	/* Setting MIME type explicitly using @Produces annotation. 
-	 * Content will displayed in browser if possible. */
+
+	/*
+	 * Setting MIME type explicitly using @Produces annotation. Content will
+	 * displayed in browser if possible.
+	 */
 	@Path("/png-file/")
 	@GET
 	@Produces("image/png")
@@ -81,7 +84,7 @@ public class FileDownloadResource {
 		try {
 
 			file = resourceLoader.getResource("classpath:static/sample.png").getFile();
-			
+
 			if (!file.exists()) {
 				throw new WebApplicationException(404);
 			}
@@ -89,7 +92,7 @@ public class FileDownloadResource {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		ResponseBuilder rb = Response.ok(file);
 
 		/* Setting file name */
