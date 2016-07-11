@@ -1,4 +1,4 @@
-package in.geekmj.resource;
+package org.geekmj.resource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.geekmj.model.BeanParamModel;
 import org.springframework.stereotype.Component;
-
-import in.geekmj.model.BeanParamModel;
 
 @Path("/bean-param")
 @Produces(MediaType.APPLICATION_JSON)

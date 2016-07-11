@@ -1,4 +1,4 @@
-package in.geekmj.resource;
+package org.geekmj.resource;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,11 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.geekmj.model.ConstructorDateParamModel;
+import org.geekmj.model.DateParamModel;
+import org.geekmj.model.StaticMethodDateParamModel;
 import org.springframework.stereotype.Component;
-
-import in.geekmj.model.ConstructorDateParamModel;
-import in.geekmj.model.DateParamModel;
-import in.geekmj.model.StaticMethodDateParamModel;
 
 @Path("/custom-type-for-parameters")
 @Produces(MediaType.APPLICATION_JSON)

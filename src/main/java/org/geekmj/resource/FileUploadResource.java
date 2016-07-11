@@ -1,4 +1,4 @@
-package in.geekmj.resource;
+package org.geekmj.resource;
 
 import java.io.IOException;
 import java.io.InputStream;

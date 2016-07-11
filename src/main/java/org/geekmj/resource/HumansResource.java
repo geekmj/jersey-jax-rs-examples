@@ -1,4 +1,4 @@
-package in.geekmj.resource;
+package org.geekmj.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

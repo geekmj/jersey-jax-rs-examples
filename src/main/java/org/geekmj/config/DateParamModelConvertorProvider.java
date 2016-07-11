@@ -1,4 +1,4 @@
-package in.geekmj.config;
+package org.geekmj.config;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -7,7 +7,7 @@ import javax.ws.rs.ext.ParamConverter;
 import javax.ws.rs.ext.ParamConverterProvider;
 import javax.ws.rs.ext.Provider;
 
-import in.geekmj.model.DateParamModel;
+import org.geekmj.model.DateParamModel;
 
 @Provider
 public class DateParamModelConvertorProvider implements ParamConverterProvider {

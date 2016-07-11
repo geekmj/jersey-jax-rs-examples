@@ -1,4 +1,4 @@
-package in.geekmj.model;
+package org.geekmj.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package in.geekmj.domain;
+package org.geekmj.domain;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package in.geekmj.model;
+package org.geekmj.model;
 
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.HeaderParam;
